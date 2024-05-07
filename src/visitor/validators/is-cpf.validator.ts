@@ -13,7 +13,7 @@ export class IsCPFConstraint implements ValidatorConstraintInterface {
   }
 
   defaultMessage() {
-    return 'CPF inválido'; // Mensagem de erro padrão se o CPF for inválido
+    return 'CPF inválido';
   }
 }
 
