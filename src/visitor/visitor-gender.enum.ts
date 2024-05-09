@@ -1,5 +1,6 @@
 export enum VisitorGender {
-  MALE = 'Homem',
-  FEMALE = 'Mulher',
-  OTHER = 'Outro',
+  MALE = 'male',
+  FEMALE = 'female',
+  OTHER = 'other',
+  UNINFORMED = 'uninformed',
 }
