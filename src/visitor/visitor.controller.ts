@@ -4,17 +4,20 @@ import { VisitorService } from './visitor.service';
 import { Visitor } from './entities/visitor.entity';
 import { VisitorGender } from './visitor-gender.enum';
 import { GetVisitorByDayDto } from './dto/get-visitor-by-day';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('visitor')
 export class VisitorController {
   constructor(private readonly visitorService: VisitorService) {}
 
   @Post()
+  @IsPublic()
   create(@Body() createVisitorDto: CreateVisitorDto): Promise<Visitor> {
     return this.visitorService.create(createVisitorDto);
   }
 
   @Get()
+  @IsPublic()
   findAll(): Promise<Visitor[]> {
     return this.visitorService.findAll();
   }
