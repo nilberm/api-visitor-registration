@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateVisitorDto } from './dto/create-visitor.dto';
-import { VisitorService } from './visitor.service';
+import { VisitorService, VisitorStatistics } from './visitor.service';
 import { Visitor } from './entities/visitor.entity';
 import { VisitorGender } from './visitor-gender.enum';
 import { GetVisitorByDayDto } from './dto/get-visitor-by-day';
@@ -28,7 +28,12 @@ export class VisitorController {
   }
 
   @Get('/by-states')
-  findVisitorByStates(): Promise<{ state: string; count: number }[]> {
+  findVisitorByStates(): Promise<
+    {
+      date: { month: number; year: number };
+      states: { state: string; count: number }[];
+    }[]
+  > {
     return this.visitorService.getVisitorsByState();
   }
 
@@ -39,13 +44,19 @@ export class VisitorController {
 
   @Get('/by-day')
   findVisitorByDay(
-    @Body() getVisitorByDayDto: GetVisitorByDayDto,
+    @Query() getVisitorByDayDto: GetVisitorByDayDto,
   ): Promise<{ date: string; count: number }[]> {
     return this.visitorService.getVisitorsByDay(getVisitorByDayDto);
   }
 
+  @IsPublic()
   @Get('/by-month')
   findVisitorByMonth(): Promise<{ date: string; count: number }[]> {
     return this.visitorService.getVisitorsByMonth();
+  }
+
+  @Get('/to-download')
+  findInformationToDownload(): Promise<VisitorStatistics> {
+    return this.visitorService.getInformationToDownload();
   }
 }

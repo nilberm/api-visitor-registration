@@ -1,13 +1,11 @@
-import { IsInt, IsNotEmpty, Max, Min } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class GetVisitorByDayDto {
   @IsNotEmpty()
-  @IsInt()
-  @Min(0)
-  @Max(11)
-  month: number;
+  @IsString()
+  month: string;
 
   @IsNotEmpty()
-  @IsInt()
-  year: number;
+  @IsString()
+  year: string;
 }
