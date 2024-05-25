@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsString,
@@ -9,6 +10,10 @@ import {
 export class AuthLoginCredentialsDto {
   @IsEmail()
   @IsString()
+  @ApiProperty({
+    example: 'test@teste.com',
+    description: 'A valid email address of the user',
+  })
   email: string;
 
   @IsString()
@@ -16,6 +21,10 @@ export class AuthLoginCredentialsDto {
   @MaxLength(32)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'password is too weak',
+  })
+  @ApiProperty({
+    example: '123@Abc',
+    description: `Must be at least eight characters long, must contain uppercase letters, lowercase letters, numbers and symbols`,
   })
   password: string;
 }
