@@ -58,7 +58,7 @@ export class VisitorService {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 2;
-    const startDate = `${currentYear}-02-01`;
+    const startDate = `${currentYear}-01-01`;
     const endDate = `${currentYear}-${currentMonth}-01`;
 
     const rawResults = await this.visitorRepository
